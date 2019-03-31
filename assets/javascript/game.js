@@ -2,7 +2,6 @@
 
 // Array of words that can be guesed in the game
 var wordBank = ["lycanthrope", "silver", "moony", "lupin", "puppy"];
-// var wordBank = ["puppy"];
 
 // Randomly selects a word in wordBank array and stores it in randomWord
 var randomWord;
@@ -86,23 +85,27 @@ var outputWord = "";
     for (i = 0; i < randomWord.length; i++) {
 
         if (correctLetters.indexOf(randomWord.charAt(i)) >= 0) {
-            outputWord.concat(randomWord.charAt(i)," ");
+            outputWord = outputWord + randomWord.charAt(i) + " ";
         }
         else {
-            outputWord.concat("_ ");
+            outputWord = outputWord + "_ ";
         }
     }
 
     // Print the output word
 
-    document.getElementById("word").innerHTML = outputWord;
+    document.getElementById("word").innerHTML = "Word: " + outputWord;
 
     // recalculates remaining guesses
 
-    remainingGuesses = remainingGuesses - (correctLetters.length + incorrectLetters.length);
+    remainingGuesses--;
+
+// Prints the number of guesses remaining, and the letters already guessed
 
     document.getElementById("guessesRemaining").innerHTML = "Number of Guesses Remaining: " + remainingGuesses;
     document.getElementById("lettersGuessed").innerHTML = "Letters Already Guessed: " + incorrectLetters;
+
+// determins when a win happens and resets game
 
     if (correctLetters.length === uniqueLetters(randomWord)) {
         numberOfWins++;
@@ -110,22 +113,11 @@ var outputWord = "";
         resetGame();
     }
     
+
+// determines if a loss has happened and resets game
+
     if (remainingGuesses === 0) {
         resetGame();
     }
 
 };
-
-
-
-// pick a random word from the array wordBank
-// User Guess a letter
-// check to see if letterGuessed is in the word in the array that had been chosen
-// if the letter is in the word, then replace _ _ _ _ _ with the filled in word
-// if the letter is not in the word, then add the letter to the letters guessed, remove a guess remaining, and make an image happen
-// once all the blanks are filled, add a win
-// if the number of guesses runs out, make an image appear
-// press a key after the lose or win to make the game reset
-
-
-// use search() to see the position. If it is > 0 then do it again, until it is -1
