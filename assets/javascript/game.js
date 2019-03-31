@@ -2,20 +2,58 @@
 
 // Array of words that can be guesed in the game
 var wordBank = ["lycanthrope", "silver", "moony", "lupin", "puppy"];
+// var wordBank = ["puppy"];
 
 // Randomly selects a word in wordBank array and stores it in randomWord
-var randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+var randomWord;
 
 // Creating an empty array for the correct letters guessed
-var correctLetters = [];
+var correctLetters;
 
 // Creating an empty array for the incorrect letters guessed
-var incorrectLetters = [];
+var incorrectLetters;
+
+// Number of wins
+var numberOfWins = 0;
+
+// Remaining Guesses to show on start
+var remainingGuesses;
 
 
+function resetGame() {
+
+    // Randomly selects a word in wordBank array and stores it in randomWord
+    randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+
+    // Creating an empty array for the correct letters guessed
+    correctLetters = [];
+
+    // Creating an empty array for the incorrect letters guessed
+    incorrectLetters = [];
+
+    // reseting remaining guesses
+    remainingGuesses = 12;
+
+}
 
 
-// Function that runs once a key is pressed
+// For flagging when there is a win. Counts the unique caharacters in the randomly selected word
+function uniqueLetters(mysteryword) {
+    var uniqueArray = [];
+    for (i=0; i < mysteryword.length; i++) {
+        if (uniqueArray.indexOf(mysteryword.charAt(i)) < 0) {
+            uniqueArray.push(mysteryword.charAt(i));
+        } 
+    }
+    var countOfUniqueArray = uniqueArray.length;
+    return countOfUniqueArray;
+}
+
+
+// Start the game, and reset the game
+resetGame();
+
+// This function runs once a key is pressed
 
 document.onkeyup = function (event) {
 
@@ -23,25 +61,57 @@ document.onkeyup = function (event) {
 
     var letterGuessed = event.key;
 
-    if (correctLetter.indexOf(letterGuessed) >= 0 || incorrectLetter.indexOf(letterGuessed) >= 0) {
+    // if the letter has aleady been guessed, then exit this function
+
+    if (correctLetters.indexOf(letterGuessed) >= 0 || incorrectLetters.indexOf(letterGuessed) >= 0) {
         return;
     }
-    
+
+// if the guessed letter is in the word, then add that letter to the array correctLetters
+
     else if (randomWord.includes(letterGuessed) === true) {
         correctLetters.push(letterGuessed);
     }
+
+// if the guessed letter is not in the random word, then add the letter to the array incorrectLetters
+
     else {
         incorrectLetters.push(letterGuessed);
     }
 
-    // Show blanks for the number of letters in the guessed word
+// Checks which position the guessed letter is in, then prints a letter or dash
+
+var outputWord = "";
+
     for (i = 0; i < randomWord.length; i++) {
+
         if (correctLetters.indexOf(randomWord.charAt(i)) >= 0) {
-            console.log(randomWord.charAt(i));
+            outputWord.concat(randomWord.charAt(i)," ");
         }
         else {
-            console.log(" _");
+            outputWord.concat("_ ");
         }
+    }
+
+    // Print the output word
+
+    document.getElementById("word").innerHTML = outputWord;
+
+    // recalculates remaining guesses
+
+    remainingGuesses = remainingGuesses - (correctLetters.length + incorrectLetters.length);
+
+    document.getElementById("guessesRemaining").innerHTML = "Number of Guesses Remaining: " + remainingGuesses;
+    document.getElementById("lettersGuessed").innerHTML = "Letters Already Guessed: " + incorrectLetters;
+
+    if (correctLetters.length === uniqueLetters(randomWord)) {
+        numberOfWins++;
+        document.getElementById("wins").innerHTML = "Wins: " + numberOfWins;
+        resetGame();
+    }
+    
+    if (remainingGuesses === 0) {
+        resetGame();
     }
 
 };
