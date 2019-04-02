@@ -6,19 +6,20 @@ var wordBank = ["lycanthrope", "silver", "moony", "lupin", "puppy"];
 // Randomly selects a word in wordBank array and stores it in randomWord
 var randomWord;
 
-// Creating an empty array for the correct letters guessed
+// Creating an array for the correct letters guessed
 var correctLetters;
 
-// Creating an empty array for the incorrect letters guessed
+// Creating an array for the incorrect letters guessed
 var incorrectLetters;
 
-// Number of wins
+// Number of wins to show on start
 var numberOfWins = 0;
 
 // Remaining Guesses to show on start
 var remainingGuesses;
 
 
+// Making a function to reset the game, which picks a random word, empties the arrays for letters guessed, and resets the remaining guesses
 function resetGame() {
 
     // Randomly selects a word in wordBank array and stores it in randomWord
@@ -76,12 +77,16 @@ document.onkeyup = function (event) {
 
     else {
         incorrectLetters.push(letterGuessed);
+        
+        // subtracts one from remaining guesses
+            
+        remainingGuesses--;
     }
 
-// Checks which position the guessed letter is in, then prints a letter or dash
+    // creates an empty string where the correct letter or dash are concated to
+    var outputWord = "";
 
-var outputWord = "";
-
+    // Checks which position the guessed letter is in, then concats a letter or dash
     for (i = 0; i < randomWord.length; i++) {
 
         if (correctLetters.indexOf(randomWord.charAt(i)) >= 0) {
@@ -96,9 +101,6 @@ var outputWord = "";
 
     document.getElementById("word").innerHTML = "Word: " + outputWord;
 
-    // recalculates remaining guesses
-
-    remainingGuesses--;
 
 // Prints the number of guesses remaining, and the letters already guessed
 
