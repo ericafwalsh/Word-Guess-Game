@@ -18,6 +18,13 @@ var numberOfWins = 0;
 // Remaining Guesses to show on start
 var remainingGuesses;
 
+function resetMoons () {
+    for (i=2; i < 14; i++) {
+        document.getElementById("moon" + i.toString()).style.display = "none";
+    }
+    document.getElementById("moon1").style.display= "block";
+}
+
 
 // Making a function to reset the game, which picks a random word, empties the arrays for letters guessed, and resets the remaining guesses
 function resetGame() {
@@ -33,7 +40,6 @@ function resetGame() {
 
     // reseting remaining guesses
     remainingGuesses = 12;
-
 }
 
 
@@ -126,6 +132,8 @@ document.onkeyup = function (event) {
         numberOfWins++;
         document.getElementById("wins").innerHTML = "Wins: " + numberOfWins;
         resetGame();
+        resetMoons();
+
     }
 
 
@@ -133,6 +141,7 @@ document.onkeyup = function (event) {
 
     if (remainingGuesses === 0) {
         resetGame();
+        resetMoons();
     }
 
 };
