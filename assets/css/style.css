@@ -26,11 +26,13 @@ body {
 
 #moon1 {
     position: relative;
+    padding: 20px;
 }
 
 #moon2, #moon3, #moon4, #moon5, #moon6, #moon7, #moon8, #moon9, #moon10, #moon11, #moon12, #moon13 {
     position: relative;
     display: none; 
+    padding: 20px;
 }
 
 #puppy {
@@ -45,4 +47,5 @@ body {
 
 #man {
     position: relative;
+    padding: 30px;
 }
