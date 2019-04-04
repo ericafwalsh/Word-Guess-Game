@@ -37,13 +37,22 @@ function resetGame() {
 }
 
 
+// function that changes the display to each moon image to block or none depending on how many guesses left
+function updateImage() {
+    var i = 12 - remainingGuesses;
+    if (i !== 0) {
+        document.getElementById("moon" + i.toString()).style.display = "none";
+    }
+    document.getElementById("moon" + (i+1).toString()).style.display= "block";
+}
+
 // For flagging when there is a win. Counts the unique caharacters in the randomly selected word
 function uniqueLetters(mysteryword) {
     var uniqueArray = [];
-    for (i=0; i < mysteryword.length; i++) {
+    for (i = 0; i < mysteryword.length; i++) {
         if (uniqueArray.indexOf(mysteryword.charAt(i)) < 0) {
             uniqueArray.push(mysteryword.charAt(i));
-        } 
+        }
     }
     var countOfUniqueArray = uniqueArray.length;
     return countOfUniqueArray;
@@ -67,20 +76,24 @@ document.onkeyup = function (event) {
         return;
     }
 
-// if the guessed letter is in the word, then add that letter to the array correctLetters
+    // if the guessed letter is in the word, then add that letter to the array correctLetters
 
     else if (randomWord.includes(letterGuessed) === true) {
         correctLetters.push(letterGuessed);
     }
 
-// if the guessed letter is not in the random word, then add the letter to the array incorrectLetters
+    // if the guessed letter is not in the random word, then add the letter to the array incorrectLetters
 
     else {
         incorrectLetters.push(letterGuessed);
-        
+
         // subtracts one from remaining guesses
-            
+
         remainingGuesses--;
+
+        // runs the function that decides if an image should be shown or not
+        updateImage();
+
     }
 
     // creates an empty string where the correct letter or dash are concated to
@@ -102,21 +115,21 @@ document.onkeyup = function (event) {
     document.getElementById("word").innerHTML = "Word: " + outputWord;
 
 
-// Prints the number of guesses remaining, and the letters already guessed
+    // Prints the number of guesses remaining, and the letters already guessed
 
     document.getElementById("guessesRemaining").innerHTML = "Number of Guesses Remaining: " + remainingGuesses;
     document.getElementById("lettersGuessed").innerHTML = "Letters Already Guessed: " + incorrectLetters;
 
-// determins when a win happens and resets game
+    // determines when a win happens and resets game
 
     if (correctLetters.length === uniqueLetters(randomWord)) {
         numberOfWins++;
         document.getElementById("wins").innerHTML = "Wins: " + numberOfWins;
         resetGame();
     }
-    
 
-// determines if a loss has happened and resets game
+
+    // determines if a loss has happened and resets game
 
     if (remainingGuesses === 0) {
         resetGame();

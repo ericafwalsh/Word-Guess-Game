@@ -3,112 +3,46 @@ h1 {
     margin: auto;
     width: 50%;
     padding: 20px;
+    color: white;
+}
+
+body {
+    color: white;
+    background-color: black;
+    font-size: 20px;
 }
 
 #left-side {
     position: relative;
-    left: 33%;
+    left: 10%;
     float: left;
 }
 
 #right-side {
     position: relative;
     float: right;
-    right: 33%;
+    right: 40%;
 }
 
 #moon1 {
     position: relative;
-    z-index: 12;
 }
 
-
-#moon2 {
+#moon2, #moon3, #moon4, #moon5, #moon6, #moon7, #moon8, #moon9, #moon10, #moon11, #moon12, #moon13 {
     position: relative;
-    z-index: 11;
-    display: none;
-}
-
-
-#moon3 {
-    position: relative;
-    z-index: 10;
-    display: none;
-}
-
-#moon4 {
-    position: relative;
-    z-index: 9;
-    display: none;
-}
-
-
-#moon5 {
-    position: relative;
-    z-index: 8;
-    display: none;
-}
-
-
-#moon6 {
-    position: relative;
-    z-index: 7;
-    display: none;
-}
-
-#moon7 {
-    position: relative;
-    z-index: 6;
-    display: none;
-}
-
-
-#moon8 {
-    position: relative;
-    z-index: 5;
-    display: none;
-}
-
-
-#moon9 {
-    position: relative;
-    z-index: 4;
-    display: none;
-}
-
-#moon10 {
-    position: relative;
-    z-index: 3;
-    display: none;
-}
-
-
-#moon11 {
-    position: relative;
-    z-index: 2;
-    display: none;
-}
-
-
-#moon12 {
-    position: relative;
-    z-index: 1;
-    display: none;
+    display: none; 
 }
 
 #puppy {
     position: relative;
-    z-index: 3;
     display: none;
 }
 
 #werewolf {
     position: relative;
-    z-index: 2;
     display: none;
 }
 
 #man {
     position: relative;
-    z-index: 1;
 }
