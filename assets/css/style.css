@@ -35,11 +35,6 @@ body {
     padding: 20px;
 }
 
-#puppy {
-    position: relative;
-    display: none;
-}
-
 #werewolf {
     position: relative;
     display: none;

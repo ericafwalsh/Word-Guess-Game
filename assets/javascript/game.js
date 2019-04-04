@@ -18,11 +18,35 @@ var numberOfWins = 0;
 // Remaining Guesses to show on start
 var remainingGuesses;
 
+
+// function that changes the display to each moon image to block or none depending on how many guesses left
+function updateImage() {
+    var i = 12 - remainingGuesses;
+    if (i !== 0) {
+        document.getElementById("moon" + i.toString()).style.display = "none";
+    }
+    document.getElementById("moon" + (i+1).toString()).style.display= "block";
+}
+
+
+// function that turns off all moons except the first one when the game is over
 function resetMoons () {
     for (i=2; i < 14; i++) {
         document.getElementById("moon" + i.toString()).style.display = "none";
     }
     document.getElementById("moon1").style.display= "block";
+}
+
+// function for a werewolf image
+function updateWerewolfImage() {
+    if (remainingGuesses === 0) {
+        document.getElementById("man").style.display = "none";
+        document.getElementById("werewolf").style.display = "block";
+    }
+    else {
+    document.getElementById("man").style.display = "block";
+    document.getElementById("werewolf").style.display = "none";  
+    }
 }
 
 
@@ -42,17 +66,7 @@ function resetGame() {
     remainingGuesses = 12;
 }
 
-
-// function that changes the display to each moon image to block or none depending on how many guesses left
-function updateImage() {
-    var i = 12 - remainingGuesses;
-    if (i !== 0) {
-        document.getElementById("moon" + i.toString()).style.display = "none";
-    }
-    document.getElementById("moon" + (i+1).toString()).style.display= "block";
-}
-
-// For flagging when there is a win. Counts the unique caharacters in the randomly selected word
+// For flagging when there is a win. Counts the unique characters in the randomly selected word
 function uniqueLetters(mysteryword) {
     var uniqueArray = [];
     for (i = 0; i < mysteryword.length; i++) {
@@ -116,6 +130,8 @@ document.onkeyup = function (event) {
         }
     }
 
+    updateWerewolfImage();
+
     // Print the output word
 
     document.getElementById("word").innerHTML = "Word: " + outputWord;
@@ -126,7 +142,8 @@ document.onkeyup = function (event) {
     document.getElementById("guessesRemaining").innerHTML = "Number of Guesses Remaining: " + remainingGuesses;
     document.getElementById("lettersGuessed").innerHTML = "Letters Already Guessed: " + incorrectLetters;
 
-    // determines when a win happens and resets game
+    // determines when a win happens by comparing the unique characters in the correctLetters guessed array
+    // to the unique letters in the random word, and resets game
 
     if (correctLetters.length === uniqueLetters(randomWord)) {
         numberOfWins++;
