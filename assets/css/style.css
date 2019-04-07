@@ -45,7 +45,7 @@ p {
     padding: 20px;
 }
 
-#werewolf {
+#werewolf, #puppy {
     position: relative;
     display: none;
 }

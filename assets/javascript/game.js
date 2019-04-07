@@ -28,16 +28,16 @@ function updateMoons() {
     if (i !== 0) {
         document.getElementById("moon" + i.toString()).style.display = "none";
     }
-    document.getElementById("moon" + (i+1).toString()).style.display= "block";
+    document.getElementById("moon" + (i + 1).toString()).style.display = "block";
 }
 
 
 // function that turns off all moons except the first one when the game is over
-function resetMoons () {
-    for (i=2; i < 14; i++) {
+function resetMoons() {
+    for (i = 2; i < 14; i++) {
         document.getElementById("moon" + i.toString()).style.display = "none";
     }
-    document.getElementById("moon1").style.display= "block";
+    document.getElementById("moon1").style.display = "block";
 }
 
 // function for a werewolf image
@@ -45,10 +45,12 @@ function updateWerewolfImage() {
     if (remainingGuesses === 0) {
         document.getElementById("man").style.display = "none";
         document.getElementById("werewolf").style.display = "block";
+        document.getElementById("puppy").style.display = "none";
     }
     else {
-    document.getElementById("man").style.display = "block";
-    document.getElementById("werewolf").style.display = "none";  
+        document.getElementById("man").style.display = "block";
+        document.getElementById("werewolf").style.display = "none";
+        document.getElementById("puppy").style.display = "none";
     }
 }
 
@@ -98,7 +100,7 @@ document.onkeyup = function (event) {
         resetMoons();
     };
 
-     // if the letter has aleady been guessed, then exit this function   
+    // if the letter has aleady been guessed, then exit this function   
     if (correctLetters.indexOf(letterGuessed) >= 0 || incorrectLetters.indexOf(letterGuessed) >= 0 || allowedCharacters.indexOf(letterGuessed) < 0) {
         return;
     }
@@ -157,6 +159,9 @@ document.onkeyup = function (event) {
     if (correctLetters.length === uniqueLetters(randomWord)) {
         numberOfWins++;
         document.getElementById("wins").innerHTML = "Wins: " + numberOfWins;
+        document.getElementById("man").style.display = "none";
+        document.getElementById("werewolf").style.display = "none";
+        document.getElementById("puppy").style.display = "block";
         resetGame();
     }
 
