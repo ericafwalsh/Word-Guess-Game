@@ -18,9 +18,12 @@ var numberOfWins = 0;
 // Remaining Guesses to show on start
 var remainingGuesses;
 
+// Allowable characters
+var allowedCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
 
 // function that changes the display to each moon image to block or none depending on how many guesses left
-function updateImage() {
+function updateMoons() {
     var i = 12 - remainingGuesses;
     if (i !== 0) {
         document.getElementById("moon" + i.toString()).style.display = "none";
@@ -90,9 +93,13 @@ document.onkeyup = function (event) {
 
     var letterGuessed = event.key;
 
-    // if the letter has aleady been guessed, then exit this function
+    // if the remaining Guesses equals 12, meaning the game has started over, resets the moons to the beginning
+    if (remainingGuesses === 12) {
+        resetMoons();
+    };
 
-    if (correctLetters.indexOf(letterGuessed) >= 0 || incorrectLetters.indexOf(letterGuessed) >= 0) {
+     // if the letter has aleady been guessed, then exit this function   
+    if (correctLetters.indexOf(letterGuessed) >= 0 || incorrectLetters.indexOf(letterGuessed) >= 0 || allowedCharacters.indexOf(letterGuessed) < 0) {
         return;
     }
 
@@ -112,7 +119,7 @@ document.onkeyup = function (event) {
         remainingGuesses--;
 
         // runs the function that decides if an image should be shown or not
-        updateImage();
+        updateMoons();
 
     }
 
@@ -129,6 +136,8 @@ document.onkeyup = function (event) {
             outputWord = outputWord + "_ ";
         }
     }
+
+    // calls the function that determines if man/werewolf image needs to be shown
 
     updateWerewolfImage();
 
@@ -149,16 +158,12 @@ document.onkeyup = function (event) {
         numberOfWins++;
         document.getElementById("wins").innerHTML = "Wins: " + numberOfWins;
         resetGame();
-        resetMoons();
-
     }
-
 
     // determines if a loss has happened and resets game
 
     if (remainingGuesses === 0) {
         resetGame();
-        resetMoons();
     }
 
 };

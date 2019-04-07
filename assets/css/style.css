@@ -4,24 +4,34 @@ h1 {
     width: 50%;
     padding: 20px;
     color: white;
+    font-family: 'Varela Round', sans-serif;
+    size: 40px;
 }
 
 body {
     color: white;
     background-color: black;
     font-size: 20px;
+    margin: 20px;
+}
+
+p {
+    margin: 20px;
 }
 
 #left-side {
     position: relative;
     left: 10%;
     float: left;
+    display: block;
 }
 
 #right-side {
     position: relative;
     float: right;
     right: 40%;
+    display: block;
+    font-family: 'Varela Round', sans-serif;
 }
 
 #moon1 {
